@@ -14,7 +14,7 @@ public class Conexao {
 
         //Drive de Conexão com o Banco
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://44.204.64.73/sentinel_system");
+        dataSource.setUrl("jdbc:mysql://54.147.237.78/sentinel_system");
         dataSource.setUsername("root");
         dataSource.setPassword("urubu100");
 
