@@ -14,7 +14,7 @@ public class Conexao {
 
         //Drive de Conexão com o Banco
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://3.83.178.117/sentinel_system");
+        dataSource.setUrl("jdbc:mysql://44.204.64.73/sentinel_system");
         dataSource.setUsername("root");
         dataSource.setPassword("urubu100");
 
@@ -23,7 +23,7 @@ public class Conexao {
         BasicDataSource dataSourceSQLServer = new BasicDataSource();
 
         dataSourceSQLServer.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        dataSourceSQLServer.setUrl("jdbc:sqlserver://3.213.47.135;databaseName=sentinel_system");
+        dataSourceSQLServer.setUrl("jdbc:sqlserver://3.213.47.135;databaseName=sentinel_system;trustServerCertificate=true");
         dataSourceSQLServer.setUsername("sa");
         dataSourceSQLServer.setPassword("@Thigas844246");
 
