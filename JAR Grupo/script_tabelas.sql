@@ -67,7 +67,7 @@ host_name VARCHAR(45) NOT NULL,
 data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
 fk_empresa INT, 
 CONSTRAINT fk_empresa_servidor FOREIGN KEY (fk_empresa) 
-	REFERENCES empresa (id_empresa) ON DELETE CASCADE
+	REFERENCES Empresa (id_empresa) ON DELETE CASCADE
 );
 
 -- HISTÓRICO DE ALERTAS
@@ -111,7 +111,7 @@ uso DECIMAL(10,2) NOT NULL,
 data_registro DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
 fk_componente INT NOT NULL,
 CONSTRAINT fk_componente FOREIGN KEY (fk_componente)
-	REFERENCES componente (id_componente) ON DELETE CASCADE
+	REFERENCES Componente (id_componente) ON DELETE CASCADE
 );
 
 CREATE TABLE ProcessoRegistro (
@@ -146,7 +146,9 @@ INSERT INTO Empresa (cnpj, nome) VALUES
 	(1234567890123456, "DHL");
     
 INSERT INTO Servidor (nome, host_name, fk_empresa) VALUES
-	( "Servidor de Backup", "SAMSUNGBOOK", 1);
+	( "Servidor de Backup", "SAMSUNGBOOK", 1),
+    ("Servidor de Teste", "DESKTOP-E0RLK5N", 1),
+    ("servidor de email" , "ip-172-31-80-212", 1);
     
 INSERT INTO TipoComponente (tipo) VALUES
 	("CPU"),

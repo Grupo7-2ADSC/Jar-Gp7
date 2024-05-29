@@ -43,7 +43,6 @@ public class MemoriaAplicacao extends Componente {
         //Pegando ID  do Componentes.Componente
         try {
             id_componente = con.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?", Integer.class, idServidor,id_tipo_componente);
-            id_componente = conWin.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?", Integer.class, idServidor,id_tipo_componente);
         } catch (Exception e) {
             id_componente = null;
         }
@@ -69,7 +68,6 @@ public class MemoriaAplicacao extends Componente {
         //Pegando ID  do Componentes.Componente
         try {
             id_componente = con.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?", Integer.class, idServidor,id_tipo_componente);
-            id_componente = conWin.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?", Integer.class, idServidor,id_tipo_componente);
         } catch (Exception e) {
             id_componente = null;
         }
