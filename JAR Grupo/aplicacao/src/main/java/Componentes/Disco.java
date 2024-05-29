@@ -48,15 +48,27 @@ public class Disco extends Componente {
             setNome(volume.getNome());
             setTotal(volume.getTotal());
 
-            con.update("INSERT INTO Componente (nome, total_gib, fk_tipo_componente, fk_servidor) VALUES (?, ?, ?, ?)",
-                    nome,
-                    Conversor.formatarBytes(total).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
-                    id_tipo_componente ,idServidor);
+            Integer id_componente;
 
-            conWin.update("INSERT INTO Componente (nome, total_gib, fk_tipo_componente, fk_servidor) VALUES (?, ?, ?, ?)",
-                    nome,
-                    Conversor.formatarBytes(total).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
-                    id_tipo_componente ,idServidor);
+            //Pegando ID  do Componentes.Componente
+            try {
+                id_componente = con.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ? AND nome = ?", Integer.class, idServidor,id_tipo_componente, nome);
+            } catch (Exception e) {
+                id_componente = null;
+            }
+
+            if (id_componente == null) {
+
+                con.update("INSERT INTO Componente (nome, total_gib, fk_tipo_componente, fk_servidor) VALUES (?, ?, ?, ?)",
+                        nome,
+                        Conversor.formatarBytes(total).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
+                        id_tipo_componente ,idServidor);
+
+                conWin.update("INSERT INTO Componente (nome, total_gib, fk_tipo_componente, fk_servidor) VALUES (?, ?, ?, ?)",
+                        nome,
+                        Conversor.formatarBytes(total).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
+                        id_tipo_componente ,idServidor);
+            }
         }
     }
 
