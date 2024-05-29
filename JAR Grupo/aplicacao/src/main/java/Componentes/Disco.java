@@ -40,7 +40,7 @@ public class Disco extends Componente {
     }
 
     @Override
-    public void coletarDadosFixos(JdbcTemplate con, Integer idServidor) {
+    public void coletarDadosFixos(JdbcTemplate con,JdbcTemplate conWin ,Integer idServidor) {
 
         Integer id_tipo_componente = getIdTipoComponente();
 
@@ -52,11 +52,16 @@ public class Disco extends Componente {
                     nome,
                     Conversor.formatarBytes(total).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
                     id_tipo_componente ,idServidor);
+
+            conWin.update("INSERT INTO Componente (nome, total_gib, fk_tipo_componente, fk_servidor) VALUES (?, ?, ?, ?)",
+                    nome,
+                    Conversor.formatarBytes(total).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
+                    id_tipo_componente ,idServidor);
         }
     }
 
     @Override
-    public void coletarDadosDinamicos (JdbcTemplate con, Integer idServidor) {
+    public void coletarDadosDinamicos (JdbcTemplate con, JdbcTemplate conWin , Integer idServidor) {
 
         Integer id_tipo_componente = getIdTipoComponente();
         Integer id_componente;
@@ -78,6 +83,10 @@ public class Disco extends Componente {
             System.out.println("Em Uso: " + Conversor.formatarBytes(uso));
 
             con.update("INSERT INTO Registro (uso, fk_componente) VALUES (?, ?)",
+                    Conversor.formatarBytes(uso).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
+                    id_componente);
+
+            conWin.update("INSERT INTO Registro (uso, fk_componente) VALUES (?, ?)",
                     Conversor.formatarBytes(uso).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
                     id_componente);
         }

@@ -15,6 +15,7 @@ public class Main {
 
         Conexao conexao = new Conexao();
         JdbcTemplate con = conexao.getConexaoDoBanco();
+        JdbcTemplate conWin = conexao.getConexaoDBWIN();
         Timer timer = new Timer();
 
         Disco disco = new Disco();
@@ -42,6 +43,8 @@ public class Main {
         try {
             idServidor = con.queryForObject("SELECT id_servidor FROM Servidor WHERE host_name = ?", Integer.class, hostName);
             System.out.println("\nID Servidor: " + idServidor);
+            idServidor = conWin.queryForObject("SELECT id_servidor FROM Servidor WHERE host_name = ?", Integer.class, hostName);
+            System.out.println("\nID Servidor: " + idServidor);
         } catch (Exception e) {
             idServidor = null;
             System.out.println("ID DO SERVIDOR NÃO ENCONTRADO: " + idServidor);
@@ -55,9 +58,9 @@ public class Main {
 
 //      Coleta de dados fixos são executadas apenas uma vez
 //      fora do timer.schedule (Bloco que se repete a cada intervalo de tempo)
-        disco.coletarDadosFixos(con, idServidor);
-        memoria.coletarDadosFixos(con, idServidor);
-        processador.coletarDadosFixos(con, idServidor);
+        disco.coletarDadosFixos(con,conWin ,idServidor);
+        memoria.coletarDadosFixos(con,conWin ,idServidor);
+        processador.coletarDadosFixos(con,conWin ,idServidor);
 
         Integer finalIdServidor = idServidor;
         timer.schedule(new TimerTask() {
@@ -65,12 +68,12 @@ public class Main {
 
                 if (finalIdServidor != null) {
 
-                    disco.coletarDadosDinamicos(con, finalIdServidor);
-                    memoria.coletarDadosDinamicos(con, finalIdServidor);
-                    processador.coletarDadosDinamicos(con, finalIdServidor);
-                    processo.coletarDadosDeProcessos(con, finalIdServidor);
-                    sistema.coletarDadosDeSistemaOperacional(con, finalIdServidor);
-                    rede.coletarDadosDeRede(con, finalIdServidor);
+                    disco.coletarDadosDinamicos(con,conWin, finalIdServidor);
+                    memoria.coletarDadosDinamicos(con,conWin,  finalIdServidor);
+                    processador.coletarDadosDinamicos(con,conWin,  finalIdServidor);
+                    processo.coletarDadosDeProcessos(con,conWin, finalIdServidor);
+                    sistema.coletarDadosDeSistemaOperacional(con,conWin, finalIdServidor);
+                    rede.coletarDadosDeRede(con,conWin, finalIdServidor);
 
                 }
             }

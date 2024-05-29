@@ -37,7 +37,7 @@ public class RedeAplicacao {
     public RedeAplicacao() {
     }
 
-    public void coletarDadosDeRede(JdbcTemplate con, Integer idServidor) {
+    public void coletarDadosDeRede(JdbcTemplate con,JdbcTemplate conWin ,  Integer idServidor) {
 
         System.out.println("\nREDE");
 
@@ -63,6 +63,14 @@ public class RedeAplicacao {
 
                 // Inserir os valores no banco de dados
                 con.update("INSERT INTO RedeRegistro (endereco_ipv4, endereco_ipv6, bytes_recebidos, bytes_enviados, pacotes_recebidos, pacotes_enviados, fk_servidor) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                        endereco_ipv4.replaceAll("\\[|\\]", ""),
+                        endereco_ipv6.replaceAll("\\[|\\]", ""),
+                        Conversor.formatarBytes(bytes_recebidos).replace("MiB", "").replace(",", ".").replace("GiB","").replace("KiB", ""),
+                        Conversor.formatarBytes(bytes_enviados).replace("MiB", "").replace(",", ".").replace("GiB","").replace("KiB", ""),
+                        pacotes_recebidos,
+                        pacotes_enviados,
+                        idServidor);
+                conWin.update("INSERT INTO RedeRegistro (endereco_ipv4, endereco_ipv6, bytes_recebidos, bytes_enviados, pacotes_recebidos, pacotes_enviados, fk_servidor) VALUES (?, ?, ?, ?, ?, ?, ?)",
                         endereco_ipv4.replaceAll("\\[|\\]", ""),
                         endereco_ipv6.replaceAll("\\[|\\]", ""),
                         Conversor.formatarBytes(bytes_recebidos).replace("MiB", "").replace(",", ".").replace("GiB","").replace("KiB", ""),
