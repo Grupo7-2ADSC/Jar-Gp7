@@ -53,8 +53,8 @@ public class Disco extends Componente {
 
             //Pegando ID  do Componente
             try {
-                id_componente = con.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?", Integer.class, idServidor,id_tipo_componente);
-                id_componente_nuvem = conWin.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?", Integer.class, idServidorNuvem,id_tipo_componente);
+                id_componente = con.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ? AND nome = ?", Integer.class, idServidor,id_tipo_componente, nome);
+                id_componente_nuvem = conWin.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?AND nome = ?", Integer.class, idServidor,id_tipo_componente, nome);
 
             } catch (Exception e) {
                 id_componente = null;
@@ -93,8 +93,8 @@ public class Disco extends Componente {
 
             //Pegando ID  do Componente
             try {
-                id_componente = con.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?", Integer.class, idServidor,id_tipo_componente);
-                id_componente_nuvem = conWin.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?", Integer.class, idServidorNuvem,id_tipo_componente);
+                id_componente = con.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?AND nome = ?", Integer.class, idServidor,id_tipo_componente, nome);
+                id_componente_nuvem = conWin.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?AND nome = ?", Integer.class, idServidor,id_tipo_componente, nome);
 
             } catch (Exception e) {
                 id_componente = null;
