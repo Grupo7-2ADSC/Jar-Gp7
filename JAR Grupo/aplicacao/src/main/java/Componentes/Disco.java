@@ -76,18 +76,19 @@ public class Disco extends Componente {
     public void coletarDadosDinamicos (JdbcTemplate con, JdbcTemplate conWin , Integer idServidor) {
 
         Integer id_tipo_componente = getIdTipoComponente();
-        Integer id_componente;
-
-        //Pegando ID  do Componentes.Componente
-        try {
-            id_componente = con.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?", Integer.class, idServidor,id_tipo_componente);
-        } catch (Exception e) {
-            id_componente = null;
-        }
 
         for (Volume volume : volumeDiscos) {
             setUso(volume.getTotal() - volume.getDisponivel());
             setNome(volume.getNome());
+            Integer id_componente;
+
+            //Pegando ID  do Componentes.Componente
+            try {
+                id_componente = con.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ? AND nome = ?", Integer.class, idServidor,id_tipo_componente, nome);
+            } catch (Exception e) {
+                id_componente = null;
+            }
+
 
             System.out.println("\nDISCOS");
 
