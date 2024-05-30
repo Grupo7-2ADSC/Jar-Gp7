@@ -58,9 +58,9 @@ public class Main {
 
 //      Coleta de dados fixos são executadas apenas uma vez
 //      fora do timer.schedule (Bloco que se repete a cada intervalo de tempo)
-        disco.coletarDadosFixos(con,conWin ,idServidor);
         memoria.coletarDadosFixos(con,conWin ,idServidor);
         processador.coletarDadosFixos(con,conWin ,idServidor);
+        disco.coletarDadosFixos(con,conWin ,idServidor);
 
         Integer finalIdServidor = idServidor;
         timer.schedule(new TimerTask() {
@@ -68,9 +68,9 @@ public class Main {
 
                 if (finalIdServidor != null) {
 
-                    disco.coletarDadosDinamicos(con,conWin, finalIdServidor);
                     memoria.coletarDadosDinamicos(con,conWin,  finalIdServidor);
                     processador.coletarDadosDinamicos(con,conWin,  finalIdServidor);
+                    disco.coletarDadosDinamicos(con,conWin, finalIdServidor);
                     processo.coletarDadosDeProcessos(con,conWin, finalIdServidor);
                     sistema.coletarDadosDeSistemaOperacional(con,conWin, finalIdServidor);
                     rede.coletarDadosDeRede(con,conWin, finalIdServidor);
