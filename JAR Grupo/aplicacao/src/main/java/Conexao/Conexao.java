@@ -16,7 +16,7 @@ public class Conexao {
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost/sentinel_system");
         dataSource.setUsername("root");
-        dataSource.setPassword("urubu100git add");
+        dataSource.setPassword("urubu100");
 
         conexaoDoBanco = new JdbcTemplate(dataSource);
 
