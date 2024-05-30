@@ -4,6 +4,7 @@ import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.discos.DiscoGrupo;
 import com.github.britooo.looca.api.group.discos.Volume;
 import com.github.britooo.looca.api.util.Conversor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
@@ -54,7 +55,7 @@ public class Disco extends Componente {
             //Pegando ID  do Componente
             try {
                 id_componente = con.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ? AND nome = ?", Integer.class, idServidor,id_tipo_componente, nome);
-                id_componente_nuvem = conWin.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?AND nome = ?", Integer.class, idServidor,id_tipo_componente, nome);
+                id_componente_nuvem = conWin.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ? AND nome = ?", Integer.class, idServidor,id_tipo_componente, nome);
 
             } catch (Exception e) {
                 id_componente = null;
@@ -88,31 +89,50 @@ public class Disco extends Componente {
             setUso(volume.getTotal() - volume.getDisponivel());
             setNome(volume.getNome());
 
-            Integer id_componente;
-            Integer id_componente_nuvem;
+            Integer id_componente = null;
+            Integer id_componente_nuvem = null;
 
-            //Pegando ID  do Componente
+            // Pegando ID do Componente
             try {
-                id_componente = con.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?AND nome = ?", Integer.class, idServidor,id_tipo_componente, nome);
-                id_componente_nuvem = conWin.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?AND nome = ?", Integer.class, idServidor,id_tipo_componente, nome);
-
+                id_componente = con.queryForObject(
+                        "SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ? AND nome = ?",
+                        Integer.class, idServidor, id_tipo_componente, nome);
+            } catch (EmptyResultDataAccessException e) {
+                // Se não encontrar resultado, id_componente permanece null
             } catch (Exception e) {
-                id_componente = null;
-                id_componente_nuvem = null;
+                throw new RuntimeException("Erro ao consultar componente", e);
+            }
+
+            try {
+                id_componente_nuvem = conWin.queryForObject(
+                        "SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ? AND nome = ?",
+                        Integer.class, idServidorNuvem, id_tipo_componente, nome);
+            } catch (EmptyResultDataAccessException e) {
+                // Se não encontrar resultado, id_componente_nuvem permanece null
+            } catch (Exception e) {
+                throw new RuntimeException("Erro ao consultar componente na nuvem", e);
             }
 
             System.out.println("\nDISCOS");
-
             System.out.println("Nome: " + nome);
             System.out.println("Em Uso: " + Conversor.formatarBytes(uso));
 
-            con.update("INSERT INTO Registro (uso, fk_componente) VALUES (?, ?)",
-                    Conversor.formatarBytes(uso).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
-                    id_componente);
+            // Verificando se os IDs dos componentes foram encontrados antes de inserir no registro
+            if (id_componente != null) {
+                con.update("INSERT INTO Registro (uso, fk_componente) VALUES (?, ?)",
+                        Conversor.formatarBytes(uso).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
+                        id_componente);
+            } else {
+                System.out.println("Componente não encontrado para o servidor " + idServidor + " e volume " + nome);
+            }
 
-            conWin.update("INSERT INTO Registro (uso, fk_componente) VALUES (?, ?)",
-                    Conversor.formatarBytes(uso).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
-                    id_componente_nuvem);
+            if (id_componente_nuvem != null) {
+                conWin.update("INSERT INTO Registro (uso, fk_componente) VALUES (?, ?)",
+                        Conversor.formatarBytes(uso).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
+                        id_componente_nuvem);
+            } else {
+                System.out.println("Componente na nuvem não encontrado para o servidor " + idServidorNuvem + " e volume " + nome);
+            }
         }
     }
 
