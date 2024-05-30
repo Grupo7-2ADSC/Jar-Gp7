@@ -41,41 +41,66 @@ public class Disco extends Componente {
     }
 
     @Override
-    public void coletarDadosFixos(JdbcTemplate con,JdbcTemplate conWin ,Integer idServidor, Integer idServidorNuvem) {
-
+    public void coletarDadosFixos(JdbcTemplate con, JdbcTemplate conWin, Integer idServidor, Integer idServidorNuvem) {
         Integer id_tipo_componente = getIdTipoComponente();
 
         for (Volume volume : volumeDiscos) {
             setNome(volume.getNome());
             setTotal(volume.getTotal());
 
-            Integer id_componente;
-            Integer id_componente_nuvem;
+            Integer id_componente = null;
+            Integer id_componente_nuvem = null;
 
-            //Pegando ID  do Componente
+            // Pegando ID do Componente
             try {
-                id_componente = con.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ? AND nome = ?", Integer.class, idServidor,id_tipo_componente, nome);
-                id_componente_nuvem = conWin.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ? AND nome = ?", Integer.class, idServidor,id_tipo_componente, nome);
-
-            } catch (Exception e) {
+                id_componente = con.queryForObject(
+                        "SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ? AND nome = ?",
+                        Integer.class, idServidor, id_tipo_componente, nome);
+            } catch (EmptyResultDataAccessException e) {
                 id_componente = null;
+            } catch (Exception e) {
+                throw new RuntimeException("Erro ao consultar componente", e);
+            }
+
+            try {
+                id_componente_nuvem = conWin.queryForObject(
+                        "SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ? AND nome = ?",
+                        Integer.class, idServidorNuvem, id_tipo_componente, nome);
+            } catch (EmptyResultDataAccessException e) {
                 id_componente_nuvem = null;
+            } catch (Exception e) {
+                throw new RuntimeException("Erro ao consultar componente na nuvem", e);
             }
 
+            // Inserir o componente se ele não existir
             if (id_componente == null) {
-
-                con.update("INSERT INTO Componente (nome, total_gib, fk_tipo_componente, fk_servidor) VALUES (?, ?, ?, ?)",
+                con.update(
+                        "INSERT INTO Componente (nome, total_gib, fk_tipo_componente, fk_servidor) VALUES (?, ?, ?, ?)",
                         nome,
                         Conversor.formatarBytes(total).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
-                        id_tipo_componente ,idServidor);
+                        id_tipo_componente, idServidor
+                );
+
+                // Atualizar id_componente após a inserção
+                id_componente = con.queryForObject(
+                        "SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ? AND nome = ?",
+                        Integer.class, idServidor, id_tipo_componente, nome
+                );
             }
 
-            if(id_componente_nuvem == null) {
-
-                conWin.update("INSERT INTO Componente (nome, total_gib, fk_tipo_componente, fk_servidor) VALUES (?, ?, ?, ?)",
+            if (id_componente_nuvem == null) {
+                conWin.update(
+                        "INSERT INTO Componente (nome, total_gib, fk_tipo_componente, fk_servidor) VALUES (?, ?, ?, ?)",
                         nome,
                         Conversor.formatarBytes(total).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
-                        id_tipo_componente ,idServidorNuvem);
+                        id_tipo_componente, idServidorNuvem
+                );
+
+                // Atualizar id_componente_nuvem após a inserção
+                id_componente_nuvem = conWin.queryForObject(
+                        "SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ? AND nome = ?",
+                        Integer.class, idServidorNuvem, id_tipo_componente, nome
+                );
             }
         }
     }
