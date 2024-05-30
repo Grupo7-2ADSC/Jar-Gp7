@@ -25,7 +25,7 @@ public class SistemaOperacional {
     public SistemaOperacional() {
     }
 
-    public void coletarDadosDeSistemaOperacional (JdbcTemplate con, JdbcTemplate conWin, Integer idServidor) {
+    public void coletarDadosDeSistemaOperacional (JdbcTemplate con, JdbcTemplate conWin, Integer idServidor, Integer idServidorNuvem) {
 
         // Obtendo a data e hora da última inicialização do sistema
         LocalDateTime dataInicializacao = LocalDateTime.ofInstant(Instant.parse(sistema.getInicializado().toString()), ZoneId.systemDefault());
@@ -58,7 +58,7 @@ public class SistemaOperacional {
 
         conWin.update("INSERT INTO SistemaOperacionalRegistro (data_inicializacao, tempo_atividade, fk_servidor) VALUES (?, ?, ?)",
                 data_inicializacao,
-                tempo_atividade, idServidor);
+                tempo_atividade, idServidorNuvem);
 
     }
 

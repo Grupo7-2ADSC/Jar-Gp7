@@ -28,7 +28,7 @@ public class ProcessoAplicacao {
     public ProcessoAplicacao() {
     }
 
-    public void coletarDadosDeProcessos (JdbcTemplate con, JdbcTemplate conWin, Integer idServidor) {
+    public void coletarDadosDeProcessos (JdbcTemplate con, JdbcTemplate conWin, Integer idServidor, Integer idServidorNuvem) {
 
         System.out.println("\nPROCESSOS");
 
@@ -57,20 +57,20 @@ public class ProcessoAplicacao {
                 Integer count = con.queryForObject("SELECT COUNT(*) FROM ProcessoRegistro WHERE pid = ? AND fk_servidor = ?",
                         Integer.class, pid, idServidor);
                 Integer count2 = conWin.queryForObject("SELECT COUNT(*) FROM ProcessoRegistro WHERE pid = ? AND fk_servidor = ?",
-                        Integer.class, pid, idServidor);
+                        Integer.class, pid, idServidorNuvem);
 
-                if (count != null && count > 0 || count2 != null && count2 > 0) {
+                if (count != null && count > 0 && count2 != null && count2 > 0) {
                     // Atualiza o registro existente
                     con.update("UPDATE ProcessoRegistro SET nome = ?, uso_cpu = ?, uso_memoria = ? WHERE pid = ? AND fk_servidor = ?",
                             nome, String.format("%.1f", uso_cpu).replace(",", "."), uso_memoria, pid, idServidor);
                     conWin.update("UPDATE ProcessoRegistro SET nome = ?, uso_cpu = ?, uso_memoria = ? WHERE pid = ? AND fk_servidor = ?",
-                            nome, String.format("%.1f", uso_cpu).replace(",", "."), uso_memoria, pid, idServidor);
+                            nome, String.format("%.1f", uso_cpu).replace(",", "."), uso_memoria, pid, idServidorNuvem);
                 } else {
                     // Insere um novo registro
                     con.update("INSERT INTO ProcessoRegistro (pid, nome, uso_cpu, uso_memoria, fk_servidor) VALUES (?, ?, ?, ?, ?)",
                             pid, nome, String.format("%.1f", uso_cpu).replace(",", "."), uso_memoria, idServidor);
                     conWin.update("INSERT INTO ProcessoRegistro (pid, nome, uso_cpu, uso_memoria, fk_servidor) VALUES (?, ?, ?, ?, ?)",
-                            pid, nome, String.format("%.1f", uso_cpu).replace(",", "."), uso_memoria, idServidor);
+                            pid, nome, String.format("%.1f", uso_cpu).replace(",", "."), uso_memoria, idServidorNuvem);
                 }
             }
         }
@@ -119,4 +119,3 @@ public class ProcessoAplicacao {
         this.uso_memoria = uso_memoria;
     }
 }
-

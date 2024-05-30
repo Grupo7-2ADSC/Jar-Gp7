@@ -32,19 +32,23 @@ public class MemoriaAplicacao extends Componente {
     }
 
     @Override
-    public void coletarDadosFixos(JdbcTemplate con, JdbcTemplate conWin , Integer idServidor) {
+    public void coletarDadosFixos(JdbcTemplate con, JdbcTemplate conWin , Integer idServidor, Integer idServidorNuvem) {
 
         Integer id_tipo_componente = getIdTipoComponente();
 
         setTotal(memoria.getTotal());
 
         Integer id_componente;
+        Integer id_componente_nuvem;
 
-        //Pegando ID  do Componentes.Componente
+        //Pegando ID  do Componente
         try {
             id_componente = con.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?", Integer.class, idServidor,id_tipo_componente);
+            id_componente_nuvem = conWin.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?", Integer.class, idServidorNuvem,id_tipo_componente);
+
         } catch (Exception e) {
             id_componente = null;
+            id_componente_nuvem = null;
         }
 
         if(id_componente == null) {
@@ -52,24 +56,32 @@ public class MemoriaAplicacao extends Componente {
             con.update("INSERT INTO Componente (total_gib, fk_tipo_componente, fk_servidor) VALUES (?, ?, ?)",
                     Conversor.formatarBytes(total).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
                     id_tipo_componente ,idServidor);
+        }
+
+        if(id_componente_nuvem == null) {
 
             conWin.update("INSERT INTO Componente (total_gib, fk_tipo_componente, fk_servidor) VALUES (?, ?, ?)",
                     Conversor.formatarBytes(total).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
-                    id_tipo_componente ,idServidor);
+                    id_tipo_componente ,idServidorNuvem);
         }
     }
 
     @Override
-    public void coletarDadosDinamicos(JdbcTemplate con,JdbcTemplate conWin, Integer idServidor) {
+    public void coletarDadosDinamicos(JdbcTemplate con,JdbcTemplate conWin, Integer idServidor, Integer idServidorNuvem) {
 
         Integer id_tipo_componente = getIdTipoComponente();
-        Integer id_componente;
 
-        //Pegando ID  do Componentes.Componente
+        Integer id_componente;
+        Integer id_componente_nuvem;
+
+        //Pegando ID  do Componente
         try {
             id_componente = con.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?", Integer.class, idServidor,id_tipo_componente);
+            id_componente_nuvem = conWin.queryForObject("SELECT id_componente FROM Componente WHERE fk_servidor = ? AND fk_tipo_componente = ?", Integer.class, idServidorNuvem,id_tipo_componente);
+
         } catch (Exception e) {
             id_componente = null;
+            id_componente_nuvem = null;
         }
 
         setUso(memoria.getEmUso());
@@ -84,7 +96,7 @@ public class MemoriaAplicacao extends Componente {
 
         conWin.update("INSERT INTO Registro (uso, fk_componente) VALUES (?, ?)",
                 Conversor.formatarBytes(uso).replace("GiB", "").replace("MiB", "").replace("KiB", "").replace(",", "."),
-                id_componente);
+                id_componente_nuvem);
 
 
     }

@@ -22,9 +22,10 @@ public abstract class Componente {
         this.tipo = tipo;
     }
 
-    public abstract void coletarDadosFixos(JdbcTemplate con, JdbcTemplate conWin , Integer idServidor);
+    public abstract void coletarDadosFixos(JdbcTemplate con, JdbcTemplate conWin , Integer idServidor, Integer idServidorNuvem);
 
-    public abstract void coletarDadosDinamicos(JdbcTemplate con, JdbcTemplate conWin ,Integer idServidor);
+    public abstract void coletarDadosDinamicos(JdbcTemplate con, JdbcTemplate conWin ,Integer idServidor, Integer idServidorNuvem);
 
     public abstract Integer getIdTipoComponente ();
 }
+

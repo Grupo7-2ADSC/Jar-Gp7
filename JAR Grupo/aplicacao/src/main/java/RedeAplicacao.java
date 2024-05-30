@@ -37,7 +37,7 @@ public class RedeAplicacao {
     public RedeAplicacao() {
     }
 
-    public void coletarDadosDeRede(JdbcTemplate con,JdbcTemplate conWin ,  Integer idServidor) {
+    public void coletarDadosDeRede(JdbcTemplate con,JdbcTemplate conWin, Integer idServidor, Integer idServidorNuvem) {
 
         System.out.println("\nREDE");
 
@@ -77,7 +77,7 @@ public class RedeAplicacao {
                         Conversor.formatarBytes(bytes_enviados).replace("MiB", "").replace(",", ".").replace("GiB","").replace("KiB", ""),
                         pacotes_recebidos,
                         pacotes_enviados,
-                        idServidor);
+                        idServidorNuvem);
             }
         }
     }

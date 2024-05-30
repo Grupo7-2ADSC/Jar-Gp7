@@ -2,10 +2,12 @@ import Componentes.Disco;
 import Componentes.MemoriaAplicacao;
 import Componentes.ProcessadorAplicacao;
 import Conexao.Conexao;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,7 +33,7 @@ public class Main {
 
         try {
             InetAddress inetAddress = InetAddress.getLocalHost();
-            hostName = InetAddress.getLocalHost().getHostName();
+            hostName = inetAddress.getHostName();
             System.out.println("HOSTNAME: " + hostName);
 
         } catch (UnknownHostException e) {
@@ -39,15 +41,81 @@ public class Main {
             System.out.println("ERRO NA CAPTURA DO HOSTNAME");
         }
 
-        Integer idServidor;
+        Integer idServidorLocal = null;
+        Integer idServidorNuvem = null;
+        Integer idEmpresaLocal = null;
+
         try {
-            idServidor = con.queryForObject("SELECT id_servidor FROM Servidor WHERE host_name = ?", Integer.class, hostName);
-            System.out.println("\nID Servidor: " + idServidor);
-            idServidor = conWin.queryForObject("SELECT id_servidor FROM Servidor WHERE host_name = ?", Integer.class, hostName);
-            System.out.println("\nID Servidor: " + idServidor);
+            // Buscar informações da empresa na nuvem
+            Map<String, Object> empresaNuvem = conWin.queryForMap(
+                    "SELECT e.id_empresa, e.cnpj, e.nome FROM Empresa e " +
+                            "JOIN Servidor s ON e.id_empresa = s.fk_empresa " +
+                            "WHERE s.host_name = ?", hostName);
+
+            if (empresaNuvem != null) {
+                // Verificar se a empresa existe no banco local
+                try {
+                    idEmpresaLocal = con.queryForObject(
+                            "SELECT id_empresa FROM Empresa WHERE cnpj = ?", Integer.class, empresaNuvem.get("cnpj"));
+                } catch (Exception e) {
+                    // Empresa não encontrada no banco local
+                }
+
+                if (idEmpresaLocal == null) {
+                    // Inserir a empresa no banco local
+                    con.update(
+                            "INSERT INTO Empresa (cnpj, nome) VALUES (?, ?)",
+                            empresaNuvem.get("cnpj"),
+                            empresaNuvem.get("nome")
+                    );
+                    System.out.println("Empresa inserida no banco local.");
+
+                    // Obter o id da empresa inserida
+                    idEmpresaLocal = con.queryForObject(
+                            "SELECT id_empresa FROM Empresa WHERE cnpj = ?", Integer.class, empresaNuvem.get("cnpj"));
+                } else {
+                    System.out.println("Empresa já existe no banco local.");
+                }
+            }
+
         } catch (Exception e) {
-            idServidor = null;
-            System.out.println("ID DO SERVIDOR NÃO ENCONTRADO: " + idServidor);
+            e.printStackTrace();
+            System.out.println("ERRO AO BUSCAR OU INSERIR EMPRESA.");
+        }
+
+        try {
+            // Verificar se o servidor existe na nuvem
+            idServidorNuvem = conWin.queryForObject("SELECT id_servidor FROM Servidor WHERE host_name = ?", Integer.class, hostName);
+            System.out.println("\nIDNuvem Servidor: " + idServidorNuvem);
+
+            // Buscar informações do servidor na nuvem e mapear para a classe Servidor
+            Servidor servidorNuvem = conWin.queryForObject(
+                    "SELECT id_servidor, nome, host_name, fk_empresa FROM Servidor WHERE id_servidor = ?",
+                    new BeanPropertyRowMapper<>(Servidor.class),
+                    idServidorNuvem);
+
+            try {
+                // Verificar se o servidor existe no banco local
+                idServidorLocal = con.queryForObject("SELECT id_servidor FROM Servidor WHERE host_name = ?", Integer.class, hostName);
+                System.out.println("\nIDLocal Servidor: " + idServidorLocal);
+            } catch (Exception e) {
+                // Servidor não encontrado no banco local, inserir servidor coletado da nuvem
+                con.update(
+                        "INSERT INTO Servidor (nome, host_name, fk_empresa) VALUES (?, ?, ?)",
+                        servidorNuvem.getNome(),
+                        servidorNuvem.getHost_name(),
+                        idEmpresaLocal  // Usar idEmpresaLocal para garantir a integridade referencial
+                );
+                System.out.println("Servidor inserido no banco local.");
+
+                // Obter o id do servidor inserido
+                idServidorLocal = con.queryForObject(
+                        "SELECT id_servidor FROM Servidor WHERE host_name = ?", Integer.class, servidorNuvem.getHost_name());
+            }
+
+        } catch (Exception e) {
+            System.out.println("SERVIDOR NÃO ENCONTRADO NA NUVEM OU ERRO NA INSERÇÃO.");
+            e.printStackTrace();
         }
 
 //        Servidor servidor = new Servidor();
@@ -58,22 +126,25 @@ public class Main {
 
 //      Coleta de dados fixos são executadas apenas uma vez
 //      fora do timer.schedule (Bloco que se repete a cada intervalo de tempo)
-        memoria.coletarDadosFixos(con,conWin ,idServidor);
-        processador.coletarDadosFixos(con,conWin ,idServidor);
-        disco.coletarDadosFixos(con,conWin ,idServidor);
 
-        Integer finalIdServidor = idServidor;
+        memoria.coletarDadosFixos(con,conWin ,idServidorLocal, idServidorNuvem);
+        processador.coletarDadosFixos(con,conWin ,idServidorLocal, idServidorNuvem);
+        disco.coletarDadosFixos(con,conWin ,idServidorLocal, idServidorNuvem);
+
+        Integer finalIdServidor = idServidorLocal;
+        Integer finalIdServidorNuvem = idServidorNuvem;
+
         timer.schedule(new TimerTask() {
             public void run() {
 
                 if (finalIdServidor != null) {
 
-                    memoria.coletarDadosDinamicos(con,conWin,  finalIdServidor);
-                    processador.coletarDadosDinamicos(con,conWin,  finalIdServidor);
-                    disco.coletarDadosDinamicos(con,conWin, finalIdServidor);
-                    processo.coletarDadosDeProcessos(con,conWin, finalIdServidor);
-                    sistema.coletarDadosDeSistemaOperacional(con,conWin, finalIdServidor);
-                    rede.coletarDadosDeRede(con,conWin, finalIdServidor);
+                    memoria.coletarDadosDinamicos(con,conWin,  finalIdServidor, finalIdServidorNuvem);
+                    processador.coletarDadosDinamicos(con,conWin,  finalIdServidor, finalIdServidorNuvem);
+                    disco.coletarDadosDinamicos(con,conWin, finalIdServidor, finalIdServidorNuvem);
+                    processo.coletarDadosDeProcessos(con,conWin, finalIdServidor, finalIdServidorNuvem);
+                    sistema.coletarDadosDeSistemaOperacional(con,conWin, finalIdServidor, finalIdServidorNuvem);
+                    rede.coletarDadosDeRede(con,conWin, finalIdServidor, finalIdServidorNuvem);
 
                 }
             }
