@@ -11,6 +11,14 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.github.britooo.looca.api.core.Looca;
+import Logs.Logs;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 public class Main {
 
     public static void main(String[] args) {
@@ -19,6 +27,9 @@ public class Main {
         JdbcTemplate con = conexao.getConexaoDoBanco();
         JdbcTemplate conWin = conexao.getConexaoDBWIN();
         Timer timer = new Timer();
+
+        Looca looca = new Looca();
+        Logs log = new Logs();
 
         Disco disco = new Disco();
         MemoriaAplicacao memoria = new MemoriaAplicacao();
@@ -35,6 +46,24 @@ public class Main {
             InetAddress inetAddress = InetAddress.getLocalHost();
             hostName = inetAddress.getHostName();
             System.out.println("HOSTNAME: " + hostName);
+
+            String data;
+            log.setSistemaOperacional(looca.getSistema().getSistemaOperacional());
+            log.setHostName(looca.getRede().getParametros().getHostName());
+            data = new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(new Date());
+            log.setData(data);
+            log.setMensagem("O ID do servidor foi capturado com sucesso");
+
+            System.out.println(log.toString().replace("idMaquina: null\n", "").replace("\t",""));
+
+            String dataArquivo = new SimpleDateFormat("yyyyMMdd").format(new Date());
+            String nomeArquivoLog = dataArquivo + ".txt";
+            try (FileWriter writer = new FileWriter(nomeArquivoLog, true)) {
+                String logString = log.toString().replace("idMaquina: null\n", "").replace("\t", "");
+                writer.write(logString);
+            } catch (IOException u) {
+                System.out.println("Erro ao gerar log" + u.getMessage());
+            }
 
         } catch (UnknownHostException e) {
             e.printStackTrace();

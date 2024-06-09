@@ -1,8 +1,14 @@
+import Logs.Logs;
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.processos.Processo;
 import com.github.britooo.looca.api.group.processos.ProcessoGrupo;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ProcessoAplicacao {
@@ -17,6 +23,8 @@ public class ProcessoAplicacao {
     private Double uso_cpu;
 
     private Double uso_memoria;
+
+    Logs log = new Logs();
 
     public ProcessoAplicacao(Integer pid, String nome, Double uso_cpu, Double uso_memoria) {
         this.pid = pid;
@@ -59,12 +67,43 @@ public class ProcessoAplicacao {
                 Integer count2 = conWin.queryForObject("SELECT COUNT(*) FROM ProcessoRegistro WHERE pid = ? AND fk_servidor = ?",
                         Integer.class, pid, idServidorNuvem);
 
+                String data;
+                log.setSistemaOperacional(looca.getSistema().getSistemaOperacional());
+                log.setHostName(looca.getRede().getParametros().getHostName());
+                data = new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(new Date());
+                log.setData(data);
+
+                // Obter a data atual para o nome do arquivo de log
+                String dataArquivo = new SimpleDateFormat("yyyyMMdd").format(new Date());
+                String nomeArquivoLog = ".\\" + dataArquivo + ".txt";
+
+                File logFile = new File(nomeArquivoLog);
+                boolean isNewFile = !logFile.exists();
+
                 if (count != null && count > 0 && count2 != null && count2 > 0) {
                     // Atualiza o registro existente
                     con.update("UPDATE ProcessoRegistro SET nome = ?, uso_cpu = ?, uso_memoria = ? WHERE pid = ? AND fk_servidor = ?",
                             nome, String.format("%.1f", uso_cpu).replace(",", "."), uso_memoria, pid, idServidor);
                     conWin.update("UPDATE ProcessoRegistro SET nome = ?, uso_cpu = ?, uso_memoria = ? WHERE pid = ? AND fk_servidor = ?",
                             nome, String.format("%.1f", uso_cpu).replace(",", "."), uso_memoria, pid, idServidorNuvem);
+                    con.update("UPDATE ProcessoRegistro SET nome = ?, uso_cpu = ?, uso_memoria = ? WHERE pid = ? AND fk_servidor = ?",
+                            nome, String.format("%.1f", uso_cpu).replace(",", "."), uso_memoria, pid, idServidor);
+
+                    log.setMensagem("Registro existente atualizado com sucesso");
+
+                    System.out.println(log.toString().replace("idMaquina: null\n", "").replace("\t", ""));
+
+                    try (FileWriter writer = new FileWriter(nomeArquivoLog, true)) {
+                        if (isNewFile) {
+                            writer.write("===Início do Log===\n");
+                            writer.write("Hostname: " + log.getHostName() + "\n");
+                            writer.write("Sistema Operacional: " + log.getSistemaOperacional() + "\n\n");
+                        }
+                        writer.write("[" + data + "] Processo: " + log.getMensagem() + "\n");
+                    } catch (IOException u) {
+                        System.out.println("Erro ao gerar log" + u.getMessage());
+                    }
+
                 } else {
                     // Insere um novo registro
                     con.update("INSERT INTO ProcessoRegistro (pid, nome, uso_cpu, uso_memoria, fk_servidor) VALUES (?, ?, ?, ?, ?)",
