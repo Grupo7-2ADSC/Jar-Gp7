@@ -22,6 +22,8 @@ public class PublishingMessage {
         var client = Slack.getInstance().methods();
         var logger = LoggerFactory.getLogger("my-awesome-slack-app");
 
+//        TOKEN
+        String token = "SELECT * FROM tokenSlack;";
         // Query SQL para selecionar a utilização do Cpu
         String sql = "SELECT c.id_componente, c.nome, c.total_gib, c.data_registro, tc.tipo AS tipo_componente, \n" +
                 "s.nome AS nome_servidor FROM Componente c \n" +
@@ -60,7 +62,7 @@ public class PublishingMessage {
             String finalTexto = texto;
             var result = client.chatPostMessage(r -> r
                     // The token you used to initialize your app
-                    .token("xoxb-7153877952561-7260686794097-gSYiS0Gpds6yrIGREsxV4RKt")
+                    .token(token)
                     .channel(id)
                     .text(finalTexto)
             );
@@ -80,6 +82,8 @@ public class PublishingMessage {
         var client = Slack.getInstance().methods();
         var logger = LoggerFactory.getLogger("my-awesome-slack-app");
 
+//        TOKEN
+        String token = "SELECT * FROM tokenSlack;";
         // Query SQL para selecionar a utilização do Memoria
         String sql = "SELECT c.id_componente, c.nome, c.total_gib, c.data_registro, tc.tipo AS tipo_componente, \n" +
                 "s.nome AS nome_servidor FROM Componente c \n" +
@@ -118,7 +122,7 @@ public class PublishingMessage {
             String finalTexto = texto;
             var result = client.chatPostMessage(r -> r
                     // The token you used to initialize your app
-                    .token("xoxb-7153877952561-7260686794097-gSYiS0Gpds6yrIGREsxV4RKt")
+                    .token(token)
                     .channel(id)
                     .text(finalTexto)
             );
@@ -137,6 +141,9 @@ public class PublishingMessage {
     public static void publishMessageDiscoRegistro(String id) {
         var client = Slack.getInstance().methods();
         var logger = LoggerFactory.getLogger("my-awesome-slack-app");
+
+        //        TOKEN
+        String token = "SELECT * FROM tokenSlack;";
 
         // Query SQL para selecionar a utilização do Disco
         String sql = "SELECT c.id_componente, c.nome, c.total_gib, c.data_registro, tc.tipo AS tipo_componente, \n" +
@@ -176,7 +183,7 @@ public class PublishingMessage {
             String finalTexto = texto;
             var result = client.chatPostMessage(r -> r
                     // The token you used to initialize your app
-                    .token("xoxb-7153877952561-7260686794097-gSYiS0Gpds6yrIGREsxV4RKt")
+                    .token(token)
                     .channel(id)
                     .text(finalTexto)
             );
