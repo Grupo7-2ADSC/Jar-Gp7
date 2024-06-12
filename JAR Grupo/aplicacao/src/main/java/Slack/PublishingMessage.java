@@ -8,16 +8,13 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 import com.slack.api.Slack;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 public class PublishingMessage {
 
     //    Conexão
     static Conexao conexao = new Conexao();
     static JdbcTemplate con = conexao.getConexaoDoBanco();
     JdbcTemplate conWin = conexao.getConexaoDBWIN();
-
 
     //    Cpu Registro
 
