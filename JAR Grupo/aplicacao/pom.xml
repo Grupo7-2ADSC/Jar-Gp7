@@ -60,7 +60,7 @@
             <version>8.2.0</version>
         </dependency>
 
-<!--        SLACK-->
+        <!--        SLACK-->
         <dependency>
             <groupId>com.slack.api</groupId>
             <artifactId>slack-api-client</artifactId>
