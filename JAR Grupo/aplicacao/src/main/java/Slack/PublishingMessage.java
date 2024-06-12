@@ -1,5 +1,6 @@
 package Slack;
 
+import Componentes.TipoComponente;
 import Conexao.Conexao;
 import com.slack.api.methods.SlackApiException;
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -32,22 +33,30 @@ public class PublishingMessage {
                 "WHERE tc.tipo = 'CPU';";
 
         // Parâmetros da consulta
+        String pMin = "SELECT parametro_min FROM ConfiguracaoAlerta \n" +
+                "WHERE fk_tipo_componente = (SELECT id_tipo_componente FROM TipoComponente WHERE tipo = 'CPU');";
+
+        String pMax = "SELECT parametro_max FROM ConfiguracaoAlerta \n" +
+                "WHERE fk_tipo_componente = (SELECT id_tipo_componente FROM TipoComponente WHERE tipo = 'CPU');";
+
 
         String texto = "";
 
-//        try {
-//            // Executando a consulta e armazenando o resultado em uma variável
-//            Integer resultado = con.queryForObject(sql, Integer.class);
-//
-//            if (resultado >= 50) {
-//                texto = "Erro: utilização do Cpu acima de 50%.";
-//            } else {
-//                texto = "OK: utilização do Cpu dentro do normal.";
-//            }
-//        } catch (Exception e) {
-//            logger.error("Erro ao consultar o banco de dados: {}", e.getMessage(), e);
-//            texto = "Erro ao consultar o banco de dados.";
-//        }
+        try {
+            // Executando a consulta e armazenando o resultado em uma variável
+            Double resultado = con.queryForObject(sql, Double.class);
+            Double parametroMin = con.queryForObject(pMin, Double.class);
+            Double parametroMax = con.queryForObject(pMax, Double.class);
+
+            if (resultado > parametroMax) {
+                texto = "Erro: utilização do Cpu acima de " + parametroMax;
+            } else if (resultado < parametroMin){
+                texto = "Erro: utilização do Cpu abaixo de " + parametroMin;
+            }
+        } catch (Exception e) {
+            logger.error("Erro ao consultar o banco de dados: {}", e.getMessage(), e);
+            texto = "Erro ao consultar o banco de dados.";
+        }
 
         try {
             // Call the chat.postMessage method using the built-in WebClient
@@ -82,22 +91,30 @@ public class PublishingMessage {
                 "WHERE tc.tipo = 'MEMORIA';";
 
         // Parâmetros da consulta
+        String pMin = "SELECT parametro_min FROM ConfiguracaoAlerta \n" +
+                "WHERE fk_tipo_componente = (SELECT id_tipo_componente FROM TipoComponente WHERE tipo = 'MEMORIA');";
+
+        String pMax = "SELECT parametro_max FROM ConfiguracaoAlerta \n" +
+                "WHERE fk_tipo_componente = (SELECT id_tipo_componente FROM TipoComponente WHERE tipo = 'MEMORIA');";
+
 
         String texto = "";
 
-//        try {
-//            // Executando a consulta e armazenando o resultado em uma variável
-//            Integer resultado = con.queryForObject(sql, Integer.class);
-//
-//            if (resultado >= 50) {
-//                texto = "Erro: utilização do Memoria acima de 50%.";
-//            } else {
-//                texto = "OK: utilização do Memoria dentro do normal.";
-//            }
-//        } catch (Exception e) {
-//            logger.error("Erro ao consultar o banco de dados: {}", e.getMessage(), e);
-//            texto = "Erro ao consultar o banco de dados.";
-//        }
+        try {
+            // Executando a consulta e armazenando o resultado em uma variável
+            Integer resultado = con.queryForObject(sql, Integer.class);
+            Double parametroMin = con.queryForObject(pMin, Double.class);
+            Double parametroMax = con.queryForObject(pMax, Double.class);
+
+            if (resultado > parametroMax) {
+                texto = "Erro: utilização do memória acima de " + parametroMax;
+            } else if (resultado < parametroMin){
+                texto = "Erro: utilização do memória abaixo de " + parametroMin;
+            }
+        } catch (Exception e) {
+            logger.error("Erro ao consultar o banco de dados: {}", e.getMessage(), e);
+            texto = "Erro ao consultar o banco de dados.";
+        }
 
         try {
             // Call the chat.postMessage method using the built-in WebClient
@@ -129,27 +146,34 @@ public class PublishingMessage {
                 "s.nome AS nome_servidor FROM Componente c \n" +
                 "JOIN TipoComponente tc ON c.fk_tipo_componente = tc.id_tipo_componente \n" +
                 "JOIN Servidor s ON c.fk_servidor = s.id_servidor \n" +
-                "WHERE tc.tipo = 'REDE';";
+                "WHERE tc.tipo = 'DISCO';";
 
 
         // Parâmetros da consulta
+        String pMin = "SELECT parametro_min FROM ConfiguracaoAlerta \n" +
+                "WHERE fk_tipo_componente = (SELECT id_tipo_componente FROM TipoComponente WHERE tipo = 'DISCO');";
+
+        String pMax = "SELECT parametro_max FROM ConfiguracaoAlerta \n" +
+                "WHERE fk_tipo_componente = (SELECT id_tipo_componente FROM TipoComponente WHERE tipo = 'DISCO');";
+
 
         String texto = "";
 
-//        try {
-//            // Executando a consulta e armazenando o resultado em uma variável
-//            Integer resultado = con.queryForObject(sql, Integer.class);
-//
-//            if (resultado >= 50) {
-//                texto = "Erro: utilização do Disco acima de 50%.";
-//            } else {
-//                texto = "OK: utilização do Disco dentro do normal.";
-//            }
-//        } catch (Exception e) {
-//            logger.error("Erro ao consultar o banco de dados: {}", e.getMessage(), e);
-//            texto = "Erro ao consultar o banco de dados.";
-//        }
+        try {
+            // Executando a consulta e armazenando o resultado em uma variável
+            Integer resultado = con.queryForObject(sql, Integer.class);
+            Double parametroMin = con.queryForObject(pMin, Double.class);
+            Double parametroMax = con.queryForObject(pMax, Double.class);
 
+            if (resultado > parametroMax) {
+                texto = "Erro: utilização do disco acima de " + parametroMax;
+            } else if (resultado < parametroMin){
+                texto = "Erro: utilização do disco abaixo de " + parametroMin;
+            }
+        } catch (Exception e) {
+            logger.error("Erro ao consultar o banco de dados: {}", e.getMessage(), e);
+            texto = "Erro ao consultar o banco de dados.";
+        }
         try {
             // Call the chat.postMessage method using the built-in WebClient
             String finalTexto = texto;
