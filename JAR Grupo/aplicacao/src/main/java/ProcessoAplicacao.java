@@ -103,14 +103,30 @@ public class ProcessoAplicacao {
                     } catch (IOException u) {
                         System.out.println("Erro ao gerar log" + u.getMessage());
                     }
-
-                } else {
-                    // Insere um novo registro
-                    con.update("INSERT INTO ProcessoRegistro (pid, nome, uso_cpu, uso_memoria, fk_servidor) VALUES (?, ?, ?, ?, ?)",
-                            pid, nome, String.format("%.1f", uso_cpu).replace(",", "."), uso_memoria, idServidor);
-                    conWin.update("INSERT INTO ProcessoRegistro (pid, nome, uso_cpu, uso_memoria, fk_servidor) VALUES (?, ?, ?, ?, ?)",
-                            pid, nome, String.format("%.1f", uso_cpu).replace(",", "."), uso_memoria, idServidorNuvem);
                 }
+              else{
+                        // Insere um novo registro
+                        con.update("INSERT INTO ProcessoRegistro (pid, nome, uso_cpu, uso_memoria, fk_servidor) VALUES (?, ?, ?, ?, ?)",
+                                pid, nome, String.format("%.1f", uso_cpu).replace(",", "."), uso_memoria, idServidor);
+                        conWin.update("INSERT INTO ProcessoRegistro (pid, nome, uso_cpu, uso_memoria, fk_servidor) VALUES (?, ?, ?, ?, ?)",
+                                pid, nome, String.format("%.1f", uso_cpu).replace(",", "."), uso_memoria, idServidorNuvem);
+
+                        // Define a mensagem de sucesso para o log
+                        log.setMensagem("Novo registro inserido com sucesso");
+
+                        System.out.println(log.toString().replace("idMaquina: null\n", "").replace("\t", ""));
+
+                        try (FileWriter writer = new FileWriter(nomeArquivoLog, true)) {
+                            if (isNewFile) {
+                                writer.write("===Início do Log===\n");
+                                writer.write("Hostname: " + log.getHostName() + "\n");
+                                writer.write("Sistema Operacional: " + log.getSistemaOperacional() + "\n\n");
+                            }
+                            writer.write("[" + data + "] Processo: " + log.getMensagem() + "\n");
+                        } catch (IOException u) {
+                            System.out.println("Erro ao gerar log" + u.getMessage());
+                        }
+                    }
             }
         }
 

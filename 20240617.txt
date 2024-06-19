@@ -1,0 +1,69 @@
+===Início do Log===
+Hostname: CXPN-53WS9V3
+Sistema Operacional: Windows
+
+[20240617 23:37:30] Processo: O Hostname do servidor foi capturado com sucesso
+===Início do Log===
+Hostname: CXPN-53WS9V3
+Sistema Operacional: Windows
+
+[20240617 23:37:34] Processo: O Hostname do servidor foi capturado com sucesso
+[20240617 23:37:45] Processo: Novo registro inserido com sucesso
+[20240617 23:37:45] Processo: Novo registro inserido com sucesso
+[20240617 23:37:45] Processo: Registro existente atualizado com sucesso
+[20240617 23:37:45] Processo: Registro existente atualizado com sucesso
+[20240617 23:37:46] Processo: Novo registro inserido com sucesso
+[20240617 23:37:46] Processo: Novo registro inserido com sucesso
+[20240617 23:37:54] Processo: Registro existente atualizado com sucesso
+[20240617 23:37:54] Processo: Registro existente atualizado com sucesso
+[20240617 23:37:55] Processo: Registro existente atualizado com sucesso
+[20240617 23:37:55] Processo: Registro existente atualizado com sucesso
+[20240617 23:37:55] Processo: Novo registro inserido com sucesso
+[20240617 23:37:55] Processo: Novo registro inserido com sucesso
+[20240617 23:37:56] Processo: Novo registro inserido com sucesso
+[20240617 23:37:56] Processo: Novo registro inserido com sucesso
+[20240617 23:38:06] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:06] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:07] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:07] Processo: Novo registro inserido com sucesso
+[20240617 23:38:07] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:08] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:14] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:15] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:15] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:15] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:15] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:16] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:16] Processo: Novo registro inserido com sucesso
+[20240617 23:38:16] Processo: Novo registro inserido com sucesso
+[20240617 23:38:16] Processo: Novo registro inserido com sucesso
+[20240617 23:38:24] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:25] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:25] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:25] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:25] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:26] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:26] Processo: Novo registro inserido com sucesso
+[20240617 23:38:35] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:36] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:36] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:37] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:37] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:37] Processo: Novo registro inserido com sucesso
+[20240617 23:38:37] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:38] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:45] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:45] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:45] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:45] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:46] Processo: Novo registro inserido com sucesso
+[20240617 23:38:46] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:46] Processo: Registro existente atualizado com sucesso
+[20240617 23:38:46] Processo: Registro existente atualizado com sucesso
+===Início do Log===
+Hostname: CXPN-53WS9V3
+Sistema Operacional: Windows
+
+[20240617 23:41:21] Processo: O Hostname do servidor foi capturado com sucesso
+[20240617 23:41:32] Processo: Registro existente atualizado com sucesso
+[20240617 23:41:33] Processo: Registro existente atualizado com sucesso

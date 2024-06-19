@@ -2,6 +2,7 @@ import Componentes.Disco;
 import Componentes.MemoriaAplicacao;
 import Componentes.ProcessadorAplicacao;
 import Conexao.Conexao;
+import Slack.PublishingMessage;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -13,6 +14,7 @@ import java.util.TimerTask;
 
 import com.github.britooo.looca.api.core.Looca;
 import Logs.Logs;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -37,10 +39,12 @@ public class Main {
         ProcessoAplicacao processo = new ProcessoAplicacao();
         SistemaOperacional sistema = new SistemaOperacional();
         RedeAplicacao rede = new RedeAplicacao();
+        PublishingMessage publishingMessage = new PublishingMessage();
 
         System.out.println("\nOBTENDO HOSTNAME DO SERVIDOR");
 
         String hostName = "";
+        PublishingMessage.publishMessageDiscoRegistro("C0747L675LL");
 
         try {
             InetAddress inetAddress = InetAddress.getLocalHost();
@@ -52,9 +56,9 @@ public class Main {
             log.setHostName(looca.getRede().getParametros().getHostName());
             data = new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(new Date());
             log.setData(data);
-            log.setMensagem("O ID do servidor foi capturado com sucesso");
+            log.setMensagem("O Hostname do servidor foi capturado com sucesso");
 
-            System.out.println(log.toString().replace("idMaquina: null\n", "").replace("\t",""));
+            System.out.println(log.toString().replace("idMaquina: null\n", "").replace("\t", ""));
 
             String dataArquivo = new SimpleDateFormat("yyyyMMdd").format(new Date());
             String nomeArquivoLog = dataArquivo + ".txt";
@@ -156,25 +160,31 @@ public class Main {
 //      Coleta de dados fixos são executadas apenas uma vez
 //      fora do timer.schedule (Bloco que se repete a cada intervalo de tempo)
 
-        memoria.coletarDadosFixos(con,conWin ,idServidorLocal, idServidorNuvem);
-        processador.coletarDadosFixos(con,conWin ,idServidorLocal, idServidorNuvem);
-        disco.coletarDadosFixos(con,conWin ,idServidorLocal, idServidorNuvem);
+        memoria.coletarDadosFixos(con, conWin, idServidorLocal, idServidorNuvem);
+        processador.coletarDadosFixos(con, conWin, idServidorLocal, idServidorNuvem);
+        disco.coletarDadosFixos(con, conWin, idServidorLocal, idServidorNuvem);
 
         Integer finalIdServidor = idServidorLocal;
         Integer finalIdServidorNuvem = idServidorNuvem;
+
+             timer.schedule(new TimerTask() {
+                public void run() {
+                        PublishingMessage.publishMessageCpuRegistro("C0747L675LL");
+                        PublishingMessage.publishMessageMemoriaRegistro("C0747L675LL");
+                }
+            }, 200 * 60,  200 * 60);
 
         timer.schedule(new TimerTask() {
             public void run() {
 
                 if (finalIdServidor != null) {
 
-                    memoria.coletarDadosDinamicos(con,conWin,  finalIdServidor, finalIdServidorNuvem);
-                    processador.coletarDadosDinamicos(con,conWin,  finalIdServidor, finalIdServidorNuvem);
-                    disco.coletarDadosDinamicos(con,conWin, finalIdServidor, finalIdServidorNuvem);
-                    processo.coletarDadosDeProcessos(con,conWin, finalIdServidor, finalIdServidorNuvem);
-                    sistema.coletarDadosDeSistemaOperacional(con,conWin, finalIdServidor, finalIdServidorNuvem);
-                    rede.coletarDadosDeRede(con,conWin, finalIdServidor, finalIdServidorNuvem);
-
+                    memoria.coletarDadosDinamicos(con, conWin, finalIdServidor, finalIdServidorNuvem);
+                    processador.coletarDadosDinamicos(con, conWin, finalIdServidor, finalIdServidorNuvem);
+                    disco.coletarDadosDinamicos(con, conWin, finalIdServidor, finalIdServidorNuvem);
+                    processo.coletarDadosDeProcessos(con, conWin, finalIdServidor, finalIdServidorNuvem);
+                    sistema.coletarDadosDeSistemaOperacional(con, conWin, finalIdServidor, finalIdServidorNuvem);
+                    rede.coletarDadosDeRede(con, conWin, finalIdServidor, finalIdServidorNuvem);
                 }
             }
         }, 50, 10000);

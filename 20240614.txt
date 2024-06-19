@@ -1,0 +1,5 @@
+===Início do Log===
+Hostname: CXPN-53WS9V3
+Sistema Operacional: Windows
+
+[20240614 15:56:34] Processo: O Hostname do servidor foi capturado com sucesso
