@@ -6,6 +6,10 @@ import com.slack.api.methods.SlackApiException;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import com.slack.api.Slack;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -33,7 +37,18 @@ public class PublishingMessage {
     public static void publishMessageCpuRegistro(String id) {
         var client = Slack.getInstance().methods();
         var logger = LoggerFactory.getLogger("my-awesome-slack-app");
+        String hostName = "";
 
+        try {
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            hostName = inetAddress.getHostName();
+            System.out.println("HOSTNAME: " + hostName);
+
+            // Código de log omitido...
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+            System.out.println("ERRO NA CAPTURA DO HOSTNAME");
+        }
 //        TOKEN
         String token = "SELECT token FROM tokenSlack where idToken = 1;";
         // Query SQL para selecionar a utilização do Cpu
@@ -61,13 +76,15 @@ public class PublishingMessage {
             // Executando a consulta e armazenando o resultado em uma variável
             Double resultado = conWin.queryForObject(sql, Double.class);
             resultado = resultado * 2;
+            BigDecimal bd = new BigDecimal(resultado).setScale(2, RoundingMode.HALF_UP);
+            resultado = bd.doubleValue();
             Double parametroMin = conWin.queryForObject(pMin, Double.class);
             Double parametroMax = conWin.queryForObject(pMax, Double.class);
 
             if (resultado > parametroMax) {
-                texto = "Alerta: Utilização do Cpu acima de " + parametroMax + "%";
+                texto = hostName + " - Alerta: Utilização da CPU acima de " + parametroMax + "% \nA média foi de: " + resultado + "%";
             } else if (resultado < parametroMin) {
-                texto = "Alerta: utilização do Cpu abaixo de " + parametroMin + "%";
+                texto = hostName + " - Alerta: Utilização da CPU abaixo de " + parametroMin + "% \nA média foi de: " + resultado + "%";
             }
         } catch (Exception e) {
             logger.error("Erro ao consultar o banco de dados: {}", e.getMessage(), e);
@@ -98,6 +115,18 @@ public class PublishingMessage {
         var client = Slack.getInstance().methods();
         var logger = LoggerFactory.getLogger("my-awesome-slack-app");
         Looca looca = new Looca();
+        String hostName = "";
+
+        try {
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            hostName = inetAddress.getHostName();
+            System.out.println("HOSTNAME: " + hostName);
+
+            // Código de log omitido...
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+            System.out.println("ERRO NA CAPTURA DO HOSTNAME");
+        }
 
 //        TOKEN
         String token = "SELECT token FROM tokenSlack where idToken = 1;";
@@ -128,14 +157,16 @@ public class PublishingMessage {
             // Executando a consulta e armazenando o resultado em uma variável
             Double resultado = conWin.queryForObject(sql, Double.class);
             resultado = (resultado / converterGB(looca.getMemoria().getTotal()) * 100);
+            BigDecimal bd = new BigDecimal(resultado).setScale(2, RoundingMode.HALF_UP);
+            resultado = bd.doubleValue();
             Double parametroMin = conWin.queryForObject(pMin, Double.class);
             Double parametroMax = conWin.queryForObject(pMax, Double.class);
             String slack = conWin.queryForObject(token, String.class);
 
             if (resultado > parametroMax) {
-                texto = "Alerta: utilização do memória acima de " + parametroMax + "%";
+                texto = hostName + " - Alerta: Utilização da Memória RAM acima de " + parametroMax + "% \nA média foi de: " + resultado + "%";
             } else if (resultado < parametroMin) {
-                texto = "Alerta: utilização do memória abaixo de " + parametroMin + "%";
+                texto = hostName + " - Alerta: Utilização da Memória RAM abaixo de " + parametroMin + "% \nA média foi de: " + resultado + "%";
             }
         } catch (Exception e) {
             logger.error("Erro ao consultar o banco de dados: {}", e.getMessage(), e);
@@ -165,6 +196,18 @@ public class PublishingMessage {
     public static void publishMessageDiscoRegistro(String id) {
         var client = Slack.getInstance().methods();
         Looca looca = new Looca();
+        String hostName = "";
+
+        try {
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            hostName = inetAddress.getHostName();
+            System.out.println("HOSTNAME: " + hostName);
+
+            // Código de log omitido...
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+            System.out.println("ERRO NA CAPTURA DO HOSTNAME");
+        }
         // TOKEN
         String token = "SELECT token FROM tokenSlack where idToken = 1;";
 
@@ -186,14 +229,16 @@ public class PublishingMessage {
             // Executando a consulta e armazenando o resultado em uma variável
             Double resultado = converterGB(looca.getGrupoDeDiscos().getTamanhoTotal()) - converterGB(looca.getGrupoDeDiscos().getVolumes().get(0).getDisponivel());
             resultado = (resultado / converterGB(looca.getGrupoDeDiscos().getTamanhoTotal())) * 100;
+            BigDecimal bd = new BigDecimal(resultado).setScale(2, RoundingMode.HALF_UP);
+            resultado = bd.doubleValue();
             Double parametroMin = conWin.queryForObject(pMin, Double.class);
             Double parametroMax = conWin.queryForObject(pMax, Double.class);
             String slack = conWin.queryForObject(token, String.class);
 
             if (resultado > parametroMax) {
-                texto = "Alerta: utilização do disco acima de " + parametroMax + "%";
+                texto = hostName + " - Alerta: Utilização do Disco acima de " + parametroMax + "% \nA média foi de: " + resultado + "%";
             } else if (resultado < parametroMin) {
-                texto = "Alerta: utilização do disco abaixo de " + parametroMin + "%";
+                texto = hostName + " - Alerta: Utilização do Disco abaixo de " + parametroMin + "% \nA média foi de: " + resultado + "%";
             }
         } catch (Exception e) {
             logger.error("Erro ao consultar o banco de dados: {}", e.getMessage(), e);

@@ -1,0 +1,207 @@
+===Início do Log===
+Hostname: CXPN-53WS9V3
+Sistema Operacional: Windows
+
+[20240619 11:01:33] Processo: O Hostname do servidor foi capturado com sucesso
+[20240619 11:01:43] Processo: Registro existente atualizado com sucesso
+[20240619 11:01:49] Processo: Registro existente atualizado com sucesso
+[20240619 11:01:59] Processo: Registro existente atualizado com sucesso
+[20240619 11:02:10] Processo: Registro existente atualizado com sucesso
+===Início do Log===
+Hostname: CXPN-53WS9V3
+Sistema Operacional: Windows
+
+[20240619 11:03:53] Processo: O Hostname do servidor foi capturado com sucesso
+[20240619 11:04:01] Processo: Registro existente atualizado com sucesso
+[20240619 11:04:09] Processo: Registro existente atualizado com sucesso
+[20240619 11:04:19] Processo: Registro existente atualizado com sucesso
+[20240619 11:04:29] Processo: Registro existente atualizado com sucesso
+[20240619 11:04:39] Processo: Registro existente atualizado com sucesso
+===Início do Log===
+Hostname: CXPN-53WS9V3
+Sistema Operacional: Windows
+
+[20240619 11:07:04] Processo: O Hostname do servidor foi capturado com sucesso
+[20240619 11:07:13] Processo: Registro existente atualizado com sucesso
+[20240619 11:07:20] Processo: Registro existente atualizado com sucesso
+[20240619 11:07:30] Processo: Registro existente atualizado com sucesso
+===Início do Log===
+Hostname: CXPN-53WS9V3
+Sistema Operacional: Windows
+
+[20240619 11:11:35] Processo: O Hostname do servidor foi capturado com sucesso
+[20240619 11:11:47] Processo: Registro existente atualizado com sucesso
+[20240619 11:11:55] Processo: Registro existente atualizado com sucesso
+[20240619 11:12:05] Processo: Novo registro inserido com sucesso
+[20240619 11:12:05] Processo: Registro existente atualizado com sucesso
+[20240619 11:12:15] Processo: Registro existente atualizado com sucesso
+===Início do Log===
+Hostname: CXPN-53WS9V3
+Sistema Operacional: Windows
+
+[20240619 11:13:53] Processo: O Hostname do servidor foi capturado com sucesso
+[20240619 11:14:06] Processo: Registro existente atualizado com sucesso
+[20240619 11:14:14] Processo: Registro existente atualizado com sucesso
+[20240619 11:14:24] Processo: Registro existente atualizado com sucesso
+[20240619 11:14:34] Processo: Registro existente atualizado com sucesso
+===Início do Log===
+Hostname: CXPN-53WS9V3
+Sistema Operacional: Windows
+
+[20240619 11:17:10] Processo: O Hostname do servidor foi capturado com sucesso
+===Início do Log===
+Hostname: CXPN-53WS9V3
+Sistema Operacional: Windows
+
+[20240619 11:17:14] Processo: O Hostname do servidor foi capturado com sucesso
+[20240619 11:17:27] Processo: Registro existente atualizado com sucesso
+[20240619 11:17:30] Processo: Registro existente atualizado com sucesso
+[20240619 11:17:35] Processo: Registro existente atualizado com sucesso
+[20240619 11:17:37] Processo: Registro existente atualizado com sucesso
+[20240619 11:17:46] Processo: Registro existente atualizado com sucesso
+[20240619 11:17:47] Processo: Registro existente atualizado com sucesso
+[20240619 11:17:55] Processo: Registro existente atualizado com sucesso
+[20240619 11:17:57] Processo: Registro existente atualizado com sucesso
+[20240619 11:18:05] Processo: Registro existente atualizado com sucesso
+[20240619 11:18:07] Processo: Registro existente atualizado com sucesso
+[20240619 11:18:15] Processo: Registro existente atualizado com sucesso
+[20240619 11:18:17] Processo: Registro existente atualizado com sucesso
+[20240619 11:18:25] Processo: Registro existente atualizado com sucesso
+[20240619 11:18:27] Processo: Registro existente atualizado com sucesso
+[20240619 11:18:35] Processo: Registro existente atualizado com sucesso
+[20240619 11:18:37] Processo: Registro existente atualizado com sucesso
+[20240619 11:18:45] Processo: Registro existente atualizado com sucesso
+[20240619 11:18:47] Processo: Registro existente atualizado com sucesso
+[20240619 11:18:55] Processo: Registro existente atualizado com sucesso
+[20240619 11:18:57] Processo: Registro existente atualizado com sucesso
+[20240619 11:19:05] Processo: Registro existente atualizado com sucesso
+[20240619 11:19:07] Processo: Registro existente atualizado com sucesso
+[20240619 11:19:15] Processo: Registro existente atualizado com sucesso
+[20240619 11:19:17] Processo: Registro existente atualizado com sucesso
+[20240619 11:19:25] Processo: Registro existente atualizado com sucesso
+[20240619 11:19:27] Processo: Registro existente atualizado com sucesso
+[20240619 11:19:35] Processo: Registro existente atualizado com sucesso
+[20240619 11:19:37] Processo: Registro existente atualizado com sucesso
+[20240619 11:19:45] Processo: Registro existente atualizado com sucesso
+[20240619 11:19:47] Processo: Registro existente atualizado com sucesso
+[20240619 11:19:55] Processo: Registro existente atualizado com sucesso
+[20240619 11:19:57] Processo: Registro existente atualizado com sucesso
+[20240619 11:20:05] Processo: Registro existente atualizado com sucesso
+[20240619 11:20:07] Processo: Registro existente atualizado com sucesso
+[20240619 11:20:15] Processo: Registro existente atualizado com sucesso
+[20240619 11:20:17] Processo: Registro existente atualizado com sucesso
+[20240619 11:20:25] Processo: Registro existente atualizado com sucesso
+[20240619 11:20:27] Processo: Registro existente atualizado com sucesso
+[20240619 11:20:35] Processo: Registro existente atualizado com sucesso
+[20240619 11:20:37] Processo: Registro existente atualizado com sucesso
+[20240619 11:20:45] Processo: Registro existente atualizado com sucesso
+[20240619 11:20:47] Processo: Registro existente atualizado com sucesso
+[20240619 11:20:55] Processo: Registro existente atualizado com sucesso
+[20240619 11:20:57] Processo: Registro existente atualizado com sucesso
+[20240619 11:21:05] Processo: Registro existente atualizado com sucesso
+[20240619 11:21:07] Processo: Registro existente atualizado com sucesso
+[20240619 11:21:15] Processo: Registro existente atualizado com sucesso
+[20240619 11:21:17] Processo: Registro existente atualizado com sucesso
+[20240619 11:21:25] Processo: Registro existente atualizado com sucesso
+[20240619 11:21:27] Processo: Registro existente atualizado com sucesso
+[20240619 11:21:35] Processo: Registro existente atualizado com sucesso
+[20240619 11:21:37] Processo: Registro existente atualizado com sucesso
+[20240619 11:21:45] Processo: Registro existente atualizado com sucesso
+[20240619 11:21:47] Processo: Registro existente atualizado com sucesso
+[20240619 11:21:55] Processo: Registro existente atualizado com sucesso
+[20240619 11:21:57] Processo: Registro existente atualizado com sucesso
+[20240619 11:22:05] Processo: Registro existente atualizado com sucesso
+[20240619 11:22:07] Processo: Registro existente atualizado com sucesso
+[20240619 11:22:15] Processo: Registro existente atualizado com sucesso
+[20240619 11:22:17] Processo: Registro existente atualizado com sucesso
+[20240619 11:22:25] Processo: Registro existente atualizado com sucesso
+[20240619 11:22:27] Processo: Registro existente atualizado com sucesso
+[20240619 11:22:35] Processo: Registro existente atualizado com sucesso
+[20240619 11:22:37] Processo: Registro existente atualizado com sucesso
+[20240619 11:22:45] Processo: Registro existente atualizado com sucesso
+[20240619 11:22:47] Processo: Registro existente atualizado com sucesso
+[20240619 11:22:55] Processo: Registro existente atualizado com sucesso
+[20240619 11:22:57] Processo: Registro existente atualizado com sucesso
+[20240619 11:23:05] Processo: Registro existente atualizado com sucesso
+[20240619 11:23:08] Processo: Registro existente atualizado com sucesso
+[20240619 11:23:15] Processo: Registro existente atualizado com sucesso
+[20240619 11:23:17] Processo: Registro existente atualizado com sucesso
+[20240619 11:23:25] Processo: Registro existente atualizado com sucesso
+[20240619 11:23:27] Processo: Registro existente atualizado com sucesso
+[20240619 11:23:35] Processo: Registro existente atualizado com sucesso
+[20240619 11:23:37] Processo: Registro existente atualizado com sucesso
+[20240619 11:23:45] Processo: Registro existente atualizado com sucesso
+[20240619 11:23:47] Processo: Registro existente atualizado com sucesso
+[20240619 11:23:55] Processo: Registro existente atualizado com sucesso
+[20240619 11:23:57] Processo: Registro existente atualizado com sucesso
+[20240619 11:24:05] Processo: Registro existente atualizado com sucesso
+[20240619 11:24:05] Processo: Novo registro inserido com sucesso
+[20240619 11:24:07] Processo: Registro existente atualizado com sucesso
+[20240619 11:24:15] Processo: Registro existente atualizado com sucesso
+[20240619 11:24:17] Processo: Registro existente atualizado com sucesso
+[20240619 11:24:25] Processo: Registro existente atualizado com sucesso
+[20240619 11:24:27] Processo: Registro existente atualizado com sucesso
+[20240619 11:24:35] Processo: Registro existente atualizado com sucesso
+[20240619 11:24:37] Processo: Registro existente atualizado com sucesso
+[20240619 11:24:45] Processo: Registro existente atualizado com sucesso
+[20240619 11:24:47] Processo: Registro existente atualizado com sucesso
+[20240619 11:24:55] Processo: Registro existente atualizado com sucesso
+[20240619 11:24:57] Processo: Registro existente atualizado com sucesso
+[20240619 11:25:05] Processo: Registro existente atualizado com sucesso
+[20240619 11:25:07] Processo: Registro existente atualizado com sucesso
+[20240619 11:25:15] Processo: Registro existente atualizado com sucesso
+[20240619 11:25:17] Processo: Registro existente atualizado com sucesso
+[20240619 11:25:25] Processo: Registro existente atualizado com sucesso
+[20240619 11:25:27] Processo: Registro existente atualizado com sucesso
+[20240619 11:25:35] Processo: Registro existente atualizado com sucesso
+[20240619 11:25:37] Processo: Registro existente atualizado com sucesso
+[20240619 11:25:45] Processo: Registro existente atualizado com sucesso
+[20240619 11:25:47] Processo: Registro existente atualizado com sucesso
+[20240619 11:25:55] Processo: Registro existente atualizado com sucesso
+[20240619 11:25:57] Processo: Registro existente atualizado com sucesso
+[20240619 11:26:05] Processo: Registro existente atualizado com sucesso
+[20240619 11:26:07] Processo: Registro existente atualizado com sucesso
+[20240619 11:26:15] Processo: Registro existente atualizado com sucesso
+[20240619 11:26:17] Processo: Registro existente atualizado com sucesso
+[20240619 11:26:25] Processo: Registro existente atualizado com sucesso
+[20240619 11:26:27] Processo: Registro existente atualizado com sucesso
+[20240619 11:26:35] Processo: Registro existente atualizado com sucesso
+[20240619 11:26:37] Processo: Registro existente atualizado com sucesso
+[20240619 11:26:45] Processo: Registro existente atualizado com sucesso
+[20240619 11:26:47] Processo: Registro existente atualizado com sucesso
+[20240619 11:26:55] Processo: Registro existente atualizado com sucesso
+[20240619 11:26:57] Processo: Registro existente atualizado com sucesso
+[20240619 11:27:05] Processo: Registro existente atualizado com sucesso
+[20240619 11:27:07] Processo: Registro existente atualizado com sucesso
+[20240619 11:27:15] Processo: Registro existente atualizado com sucesso
+[20240619 11:27:17] Processo: Registro existente atualizado com sucesso
+[20240619 11:27:25] Processo: Registro existente atualizado com sucesso
+[20240619 11:27:27] Processo: Registro existente atualizado com sucesso
+[20240619 11:27:35] Processo: Registro existente atualizado com sucesso
+[20240619 11:27:37] Processo: Registro existente atualizado com sucesso
+[20240619 11:27:45] Processo: Registro existente atualizado com sucesso
+[20240619 11:27:47] Processo: Registro existente atualizado com sucesso
+[20240619 11:27:55] Processo: Registro existente atualizado com sucesso
+[20240619 11:27:57] Processo: Registro existente atualizado com sucesso
+[20240619 11:28:05] Processo: Registro existente atualizado com sucesso
+[20240619 11:28:07] Processo: Registro existente atualizado com sucesso
+[20240619 11:28:15] Processo: Registro existente atualizado com sucesso
+[20240619 11:28:18] Processo: Registro existente atualizado com sucesso
+===Início do Log===
+Hostname: CXPN-53WS9V3
+Sistema Operacional: Windows
+
+[20240619 11:28:29] Processo: O Hostname do servidor foi capturado com sucesso
+===Início do Log===
+Hostname: CXPN-53WS9V3
+Sistema Operacional: Windows
+
+[20240619 11:28:34] Processo: O Hostname do servidor foi capturado com sucesso
+[20240619 11:28:48] Processo: Registro existente atualizado com sucesso
+[20240619 11:28:56] Processo: Registro existente atualizado com sucesso
+[20240619 11:29:06] Processo: Registro existente atualizado com sucesso
+[20240619 11:29:16] Processo: Registro existente atualizado com sucesso
+[20240619 11:29:25] Processo: Registro existente atualizado com sucesso
+[20240619 11:29:36] Processo: Registro existente atualizado com sucesso
+[20240619 11:29:48] Processo: Registro existente atualizado com sucesso
+[20240619 11:29:58] Processo: Registro existente atualizado com sucesso

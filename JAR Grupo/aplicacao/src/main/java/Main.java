@@ -44,7 +44,6 @@ public class Main {
         System.out.println("\nOBTENDO HOSTNAME DO SERVIDOR");
 
         String hostName = "";
-        PublishingMessage.publishMessageDiscoRegistro("C0747L675LL");
 
         try {
             InetAddress inetAddress = InetAddress.getLocalHost();
@@ -73,6 +72,10 @@ public class Main {
             e.printStackTrace();
             System.out.println("ERRO NA CAPTURA DO HOSTNAME");
         }
+
+
+        PublishingMessage.publishMessageDiscoRegistro("C0747L675LL");
+
 
         Integer idServidorLocal = null;
         Integer idServidorNuvem = null;
@@ -167,12 +170,12 @@ public class Main {
         Integer finalIdServidor = idServidorLocal;
         Integer finalIdServidorNuvem = idServidorNuvem;
 
-             timer.schedule(new TimerTask() {
-                public void run() {
-                        PublishingMessage.publishMessageCpuRegistro("C0747L675LL");
-                        PublishingMessage.publishMessageMemoriaRegistro("C0747L675LL");
-                }
-            }, 200 * 60,  200 * 60);
+        timer.schedule(new TimerTask() {
+            public void run() {
+                PublishingMessage.publishMessageCpuRegistro("C0747L675LL");
+                PublishingMessage.publishMessageMemoriaRegistro("C0747L675LL");
+            }
+        }, 5 * 60 * 1000, 5 * 60 * 1000);
 
         timer.schedule(new TimerTask() {
             public void run() {
