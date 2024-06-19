@@ -205,3 +205,64 @@ Sistema Operacional: Windows
 [20240619 11:29:36] Processo: Registro existente atualizado com sucesso
 [20240619 11:29:48] Processo: Registro existente atualizado com sucesso
 [20240619 11:29:58] Processo: Registro existente atualizado com sucesso
+===Início do Log===
+Hostname: CAIO8
+Sistema Operacional: Windows
+
+[20240619 17:28:27] Processo: O Hostname do servidor foi capturado com sucesso
+===Início do Log===
+Hostname: CAIO8
+Sistema Operacional: Windows
+
+[20240619 17:33:05] Processo: O Hostname do servidor foi capturado com sucesso
+[20240619 17:33:30] Processo: Novo registro inserido com sucesso
+[20240619 17:33:34] Processo: Registro existente atualizado com sucesso
+[20240619 17:33:44] Processo: Registro existente atualizado com sucesso
+[20240619 17:33:54] Processo: Registro existente atualizado com sucesso
+[20240619 17:34:04] Processo: Registro existente atualizado com sucesso
+[20240619 17:34:14] Processo: Registro existente atualizado com sucesso
+[20240619 17:34:24] Processo: Registro existente atualizado com sucesso
+[20240619 17:34:34] Processo: Registro existente atualizado com sucesso
+[20240619 17:34:44] Processo: Registro existente atualizado com sucesso
+[20240619 17:34:54] Processo: Registro existente atualizado com sucesso
+[20240619 17:35:04] Processo: Registro existente atualizado com sucesso
+[20240619 17:35:15] Processo: Registro existente atualizado com sucesso
+[20240619 17:35:25] Processo: Registro existente atualizado com sucesso
+[20240619 17:35:35] Processo: Registro existente atualizado com sucesso
+[20240619 17:35:44] Processo: Registro existente atualizado com sucesso
+[20240619 17:35:54] Processo: Registro existente atualizado com sucesso
+[20240619 17:36:04] Processo: Registro existente atualizado com sucesso
+[20240619 17:36:14] Processo: Registro existente atualizado com sucesso
+[20240619 17:36:24] Processo: Registro existente atualizado com sucesso
+[20240619 17:36:34] Processo: Registro existente atualizado com sucesso
+[20240619 17:36:44] Processo: Registro existente atualizado com sucesso
+[20240619 17:36:54] Processo: Registro existente atualizado com sucesso
+[20240619 17:37:05] Processo: Registro existente atualizado com sucesso
+[20240619 17:37:15] Processo: Registro existente atualizado com sucesso
+[20240619 17:37:25] Processo: Registro existente atualizado com sucesso
+[20240619 17:37:35] Processo: Registro existente atualizado com sucesso
+[20240619 17:37:44] Processo: Registro existente atualizado com sucesso
+[20240619 17:37:55] Processo: Registro existente atualizado com sucesso
+[20240619 17:38:05] Processo: Registro existente atualizado com sucesso
+[20240619 17:38:14] Processo: Registro existente atualizado com sucesso
+[20240619 17:38:24] Processo: Registro existente atualizado com sucesso
+[20240619 17:38:35] Processo: Registro existente atualizado com sucesso
+[20240619 17:38:45] Processo: Registro existente atualizado com sucesso
+[20240619 17:38:55] Processo: Registro existente atualizado com sucesso
+[20240619 17:39:05] Processo: Registro existente atualizado com sucesso
+[20240619 17:39:14] Processo: Registro existente atualizado com sucesso
+[20240619 17:39:24] Processo: Registro existente atualizado com sucesso
+[20240619 17:39:35] Processo: Registro existente atualizado com sucesso
+[20240619 17:39:45] Processo: Registro existente atualizado com sucesso
+[20240619 17:39:55] Processo: Registro existente atualizado com sucesso
+===Início do Log===
+Hostname: CAIO8
+Sistema Operacional: Windows
+
+[20240619 17:40:03] Processo: O Hostname do servidor foi capturado com sucesso
+[20240619 17:40:19] Processo: Registro existente atualizado com sucesso
+[20240619 17:40:27] Processo: Registro existente atualizado com sucesso
+[20240619 17:40:37] Processo: Registro existente atualizado com sucesso
+[20240619 17:40:46] Processo: Registro existente atualizado com sucesso
+[20240619 17:40:56] Processo: Registro existente atualizado com sucesso
+[20240619 17:41:07] Processo: Registro existente atualizado com sucesso

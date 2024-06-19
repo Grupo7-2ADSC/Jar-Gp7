@@ -236,9 +236,7 @@ public class PublishingMessage {
             String slack = conWin.queryForObject(token, String.class);
 
             if (resultado > parametroMax) {
-                texto = hostName + " - Alerta: Utilização do Disco acima de " + parametroMax + "% \nA média foi de: " + resultado + "%";
-            } else if (resultado < parametroMin) {
-                texto = hostName + " - Alerta: Utilização do Disco abaixo de " + parametroMin + "% \nA média foi de: " + resultado + "%";
+                texto = hostName + " - Alerta: Utilização do Disco acima de " + parametroMax + "% \nA utilização é de: " + resultado + "%";
             }
         } catch (Exception e) {
             logger.error("Erro ao consultar o banco de dados: {}", e.getMessage(), e);
